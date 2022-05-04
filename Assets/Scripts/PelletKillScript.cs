@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PelletKillScript : MonoBehaviour
 {
+    //public float countDown = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,7 @@ public class PelletKillScript : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             CORE.score++;
+            CORE.TimerOn = true;
             Destroy(this.gameObject);
         }
     }

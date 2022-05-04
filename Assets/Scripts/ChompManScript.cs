@@ -6,12 +6,10 @@ using UnityEngine.AI;
 public class ChompManScript : MonoBehaviour
 {
     Rigidbody rb;
-    NavMeshAgent pinkGhostAgent;
     TextMesh theScoreTextMesh;
 
     public GameObject scoreText;
-    public float speed = 20.0f;
-    public GameObject pinkGhost;
+    public float speed = 2.0f;
 
     private bool goForward = false;
     private bool goBackward = false;
@@ -21,8 +19,6 @@ public class ChompManScript : MonoBehaviour
     void Awake()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
-        pinkGhostAgent = this.pinkGhost.GetComponent<NavMeshAgent>();
-        pinkGhostAgent.speed = 2.0f;
         this.theScoreTextMesh = this.scoreText.GetComponent<TextMesh>();
     }
 
@@ -32,10 +28,20 @@ public class ChompManScript : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(CORE.countDown == 0 || CORE.countDown == 10)
+        {
+            if (collision.gameObject.tag.Equals("Enemy"))
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        this.pinkGhostAgent.SetDestination(this.gameObject.transform.position);
 
         if (goForward)
         {

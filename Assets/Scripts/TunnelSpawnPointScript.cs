@@ -15,7 +15,9 @@ public class TunnelSpawnPointScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         other.gameObject.transform.position = this.theOtherSpawnPoint.transform.position;
+
     }
+
 
     // Update is called once per frame
     void Update()
