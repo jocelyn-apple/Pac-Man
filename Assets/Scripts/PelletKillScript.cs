@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class PelletScript : MonoBehaviour
+public class PelletKillScript : MonoBehaviour
 {
-    private Rigidbody rb;
-
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.gameObject.GetComponent<Rigidbody>();
+        
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player"))
         {
+            CORE.score++;
             Destroy(this.gameObject);
         }
     }

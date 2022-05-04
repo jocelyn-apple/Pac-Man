@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ChompScript : MonoBehaviour
+public class ChompManScript : MonoBehaviour
 {
     Rigidbody rb;
     NavMeshAgent pinkGhostAgent;
     TextMesh theScoreTextMesh;
 
     public GameObject scoreText;
-    public float speed = 5f;
+    public float speed = 20.0f;
     public GameObject pinkGhost;
-    private int count;
 
     private bool goForward = false;
     private bool goBackward = false;
@@ -23,24 +22,14 @@ public class ChompScript : MonoBehaviour
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         pinkGhostAgent = this.pinkGhost.GetComponent<NavMeshAgent>();
-        pinkGhostAgent.speed = 2f;
+        pinkGhostAgent.speed = 2.0f;
         this.theScoreTextMesh = this.scoreText.GetComponent<TextMesh>();
-        count = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-      
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag.Equals("pellet"))
-        {
-            count++;
-            this.theScoreTextMesh.text = "Score: " + count;
-        }
+        
     }
 
     // Update is called once per frame
@@ -72,30 +61,37 @@ public class ChompScript : MonoBehaviour
             goBackward = false;
             goRight = false;
             goLeft = false;
+
         }
         else if (Input.GetKeyDown("down"))
         {
             this.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.up);
+
             goForward = false;
             goBackward = true;
             goRight = false;
             goLeft = false;
+
         }
         else if (Input.GetKeyDown("left"))
         {
             this.transform.rotation = Quaternion.LookRotation(-Camera.main.transform.right);
+
             goForward = false;
             goBackward = false;
             goRight = false;
             goLeft = true;
+
         }
         else if (Input.GetKeyDown("right"))
         {
             this.transform.rotation = Quaternion.LookRotation(Camera.main.transform.right);
+
             goForward = false;
             goBackward = false;
             goRight = true;
             goLeft = false;
+
         }
     }
 }
